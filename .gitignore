@@ -1,0 +1,15 @@
+.project
+target
+.classpath
+.settings
+.apt_generated
+.factorypath
+*.tlog
+*.log
+*.jar
+*.class
+*.prefs
+.metadata/
+.apt_generated_tests/
+pom.xml.versionsBackup
+.flattened-pom.xml

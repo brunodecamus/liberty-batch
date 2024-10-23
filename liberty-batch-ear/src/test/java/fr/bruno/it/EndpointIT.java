@@ -27,7 +27,7 @@ public class EndpointIT {
 
     @BeforeClass
     public static void init() {
-        URL = "http://localhost:9080/batch-liberty/servlet";
+        URL = "http://localhost:9080/liberty-batch-war";
     }
 
     @Test
@@ -43,7 +43,7 @@ public class EndpointIT {
 
             String response = method.getResponseBodyAsString(1000);
 
-            assertTrue("Unexpected response body", response.contains("Hello! How are you today?"));
+            assertTrue("Unexpected response body", response.contains("Hello EJB World."));
         } finally {
             method.releaseConnection();
         }  

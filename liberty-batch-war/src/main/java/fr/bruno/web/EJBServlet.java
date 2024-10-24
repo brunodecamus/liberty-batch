@@ -9,25 +9,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.bruno.ejb.MyScheduler;
 import fr.bruno.ejb.SampleStatelessBean;
 
 @WebServlet({ "/", "/liberty-batchServlet" })
 public class EJBServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	@EJB
-	SampleStatelessBean statelessBean;
+  private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  @EJB
+  MyScheduler myScheduler;
 
-		System.out.println("EJBServlet ...");
+  @EJB
+  SampleStatelessBean statelessBean;
 
-		PrintWriter writer = response.getWriter();
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		// Call hello method on a stateless session bean
-		String message = statelessBean.hello();
+    System.out.println("EJBServlet ...");
 
-		writer.println(message);
-	}
+    PrintWriter writer = response.getWriter();
+
+    // Call hello method on a stateless session bean
+    String message = statelessBean.hello();
+
+    writer.println(message);
+  }
 }

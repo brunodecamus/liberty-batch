@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <server description="liberty-batch server">
 
-    <!-- Enable features -->
-    <featureManager>
-        <feature>webProfile-8.0</feature>
-    </featureManager>
+  <!-- Enable features -->
+  <featureManager>
+    <feature>webProfile-8.0</feature>
+    <feature>localConnector-1.0</feature>
+  </featureManager>
 
-    <!-- Encoded password can be generated using bin/securityUtility -->
-    <keyStore password="change1me"/>
+  <!-- Encoded password can be generated using bin/securityUtility -->
+  <keyStore password="change1me" />
 
-    <basicRegistry id="basic" realm="BasicRealm">
-        <user name="user1" password="change1me"/>
-    </basicRegistry>
+  <basicRegistry id="basic" realm="BasicRealm">
+    <user name="user1" password="change1me" />
+  </basicRegistry>
 
-    <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
-    <httpEndpoint id="defaultHttpEndpoint"
-                  httpPort="9080"
-                  httpsPort="9443" />
-    
-    <enterpriseApplication id="liberty-batch-ear" location="liberty-batch-ear.ear" name="liberty-batch-ear"/>
+  <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
+  <httpEndpoint httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint" />
+
+  <enterpriseApplication id="liberty-batch-ear" location="liberty-batch-ear.ear" name="liberty-batch-ear" />
+
+  <applicationMonitor updateTrigger="mbean" />
 </server>

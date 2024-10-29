@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.bruno.ejb.MyScheduler;
 import fr.bruno.ejb.SampleStatelessBean;
 
@@ -16,6 +19,9 @@ import fr.bruno.ejb.SampleStatelessBean;
 public class EJBServlet extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
+
+  /** LOGGER */
+  private static final Logger LOGGER = LoggerFactory.getLogger(MyScheduler.class);
 
   @EJB
   MyScheduler myScheduler;
@@ -26,7 +32,7 @@ public class EJBServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    System.out.println("EJBServlet ...");
+    LOGGER.info("doGet ............");
 
     PrintWriter writer = response.getWriter();
 

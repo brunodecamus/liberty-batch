@@ -15,6 +15,10 @@
 
 	<name>EJB Module</name>
 
+	<properties>
+		<logback.version>1.5.6</logback.version>
+	</properties>
+
 	<dependencies>
 
 		<dependency>
@@ -24,6 +28,17 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- Logger for the masses -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>

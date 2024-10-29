@@ -53,6 +53,7 @@
                     <version>7</version>
                     <fileNameMapping>no-version</fileNameMapping>
                     <generateApplicationXml>true</generateApplicationXml>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
                 </configuration>
             </plugin>
             <plugin>

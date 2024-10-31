@@ -3,15 +3,72 @@
   <!-- Enable features -->
   <featureManager>
     <feature>webProfile-8.0</feature>
+    <feature>batchManagement-1.0</feature>
+    <feature>adminCenter-1.0</feature>
     <feature>localConnector-1.0</feature>
   </featureManager>
 
   <!-- Encoded password can be generated using bin/securityUtility -->
   <keyStore password="change1me" />
 
-  <basicRegistry id="basic" realm="BasicRealm">
-    <user name="user1" password="change1me" />
+  <!-- <basicRegistry id="basic" realm="BasicRealm"> -->
+  <!-- <user name="user1" password="change1me" /> -->
+  <!-- </basicRegistry> -->
+  <basicRegistry id="basic" realm="ibm/api">
+    <user name="alice" password="alice" />
+    <user name="bob" password="bob" />
+    <user name="jane" password="jane" />
+    <user name="joe" password="joe" />
+    <user name="admin" password="adminpwd" />
+    <user name="reader" password="readerpwd" />
   </basicRegistry>
+
+  <authorization-roles id="com.ibm.ws.batch">
+    <security-role name="batchAdmin">
+      <special-subject type="EVERYONE" />
+      <user name="alice" />
+      <user name="bob" />
+    </security-role>
+    <security-role name="batchSubmitter">
+      <special-subject type="EVERYONE" />
+      <user name="jane" />
+      <user name="phyllis" />
+      <user name="bob" />
+    </security-role>
+    <security-role name="batchMonitor">
+      <special-subject type="EVERYONE" />
+      <user name="joe" />
+      <user name="bob" />
+    </security-role>
+  </authorization-roles>
+
+  <administrator-role>
+    <user>admin</user>
+    <user>bob</user>
+  </administrator-role>
+  <reader-role>
+    <user>reader</user>
+    <user>bob</user>
+  </reader-role>
+
+  <library id="postgresql_lib">
+    <!-- <fileset dir="${server.config.dir}/resources/derby" /> -->
+    <file name="${shared.resource.dir}/postgresql/postgresql-42.7.3.jar" />
+  </library>
+
+  <!-- Batch persistence config. References a databaseStore. -->
+  <batchPersistence jobStoreRef="BatchDatabaseStore" />
+
+  <!-- The database store for the batch tables. -->
+  <!-- Note this database store is referenced by the batchPersistence element. -->
+  <databaseStore id="BatchDatabaseStore" dataSourceRef="batchDB" schema="public" tablePrefix="AM_" createTables="true" />
+
+  <!-- Data source for the batch tables. -->
+  <!-- Note this data source is referenced by databaseStore element -->
+  <dataSource id="batchDB" isolationLevel="TRANSACTION_REPEATABLE_READ">
+    <jdbcDriver libraryRef="postgresql_lib" />
+    <properties.postgresql serverName="localhost" portNumber="5432" databaseName="bd_batch" user="user" password="pass" />
+  </dataSource>
 
   <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
   <httpEndpoint httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint" />

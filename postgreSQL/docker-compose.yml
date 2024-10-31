@@ -1,35 +1,42 @@
-version: '3.8'
-services:
-    postgres:
-        image: postgres:15
-        environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=p
-        volumes:
-            - ./data:/var/lib/postgresql/data
-        ports:
-            - 5432:5432
-        networks:
-            - postgres-db-network
-    pgadmin:
-        image: dpage/pgadmin4
-        environment:
-            PGADMIN_DEFAULT_EMAIL: 'teste@teste.com'
-            PGADMIN_DEFAULT_PASSWORD: 'p'
-        ports:
-            - 16543:80
-        volumes:
-            - ./pgadmin4/servers.json:/pgadmin4/servers.json
-        networks:
-            - postgres-db-network
+version: '3.9'
 
-volumes:
-    postgres-db-volume:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: ./data
-networks:
-    postgres-db-network:
-        driver: bridge
+services:
+
+  db:
+    image: postgres:15
+    restart: always
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    #volumes:
+    #  - type: tmpfs
+    #    target: /dev/shm
+    #    tmpfs:
+    #      size: 134217728 # 128*2^20 bytes = 128Mb
+
+    volumes:
+      - C:/tmp/data:/var/lib/postgresql/data
+
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'teste@teste.com'
+      PGADMIN_DEFAULT_PASSWORD: 'teste'
+    ports:
+      - 16543:80
+    volumes:
+      - ./pgadmin4/servers.json:/pgadmin4/servers.json

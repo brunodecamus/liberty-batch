@@ -54,6 +54,7 @@
                     <fileNameMapping>no-version</fileNameMapping>
                     <generateApplicationXml>true</generateApplicationXml>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <applicationName>liberty-batch-ear</applicationName>
                 </configuration>
             </plugin>
             <plugin>

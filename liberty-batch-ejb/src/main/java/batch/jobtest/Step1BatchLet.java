@@ -11,37 +11,42 @@ import javax.inject.Inject;
 
 public class Step1BatchLet extends AbstractBatchlet {
 
-	// java.util.logging.Logger
-	Logger LOG = Logger.getLogger(Step1BatchLet.class.getName());
+  private Logger LOG = Logger.getLogger(Step1BatchLet.class.getName());
 
-	@Inject
-	JobContext jobContext;
+  @Inject
+  JobContext jobContext;
 
-	@BatchProperty
-	private String propertyName1;
+  @Inject
+  @BatchProperty(name = "paramA")
+  private String paramA;
 
-	@Override
-	public String process() throws Exception {
+  @Inject
+  @BatchProperty(name = "propertyBatchlet1")
+  private String propertyBatchlet1;
 
-		LOG.info(" - InstanceId : " + jobContext.getInstanceId());
-		LOG.info(" - ExecutionId : " + jobContext.getExecutionId());
-		LOG.info(" - ExitStatus? : " + jobContext.getExitStatus());
-		LOG.info(" - propertyName1 : " + propertyName1);
+  @Override
+  public String process() throws Exception {
 
-		Random random = new Random();
-		int n = random.nextInt(21);
+    LOG.info(" - InstanceId : " + jobContext.getInstanceId());
+    LOG.info(" - ExecutionId : " + jobContext.getExecutionId());
+    LOG.info(" - ExitStatus? : " + jobContext.getExitStatus());
 
-		LOG.info(" - pause de " + n + "s");
-		Thread.sleep(n * 1000);
+    LOG.info(" - propertyBatchlet1 : " + propertyBatchlet1);
+    LOG.info(" - paramA : " + paramA);
 
-		if (n <= 7) {
-			LOG.info(" => FAILED");
-			return BatchStatus.FAILED.toString();
-		}
+    Random random = new Random();
+    int n = random.nextInt(21);
+    LOG.info("Random n : " + n);
 
-		jobContext.setTransientUserData("Valeur step 1 " + n);
+    LOG.info(" - pause de " + n + "s");
+    Thread.sleep(n * 1000);
 
-		LOG.info(" => COMPLETED");
-		return BatchStatus.COMPLETED.toString();
-	}
+    if (n <= 7) {
+      LOG.info("(n <= 7) => FAILED");
+      return BatchStatus.FAILED.toString();
+    }
+
+    LOG.info(" => COMPLETED");
+    return BatchStatus.COMPLETED.toString();
+  }
 }

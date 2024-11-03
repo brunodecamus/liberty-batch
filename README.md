@@ -1,20 +1,36 @@
 # liberty-batch
 
- mvn archetype:generate
- 
- -  1780: remote -> io.openliberty.tools:liberty-archetype-ear (An archetype that generates a Java EE 8 multi-module project that includes an EJB module, a web application module and an EAR module)
- - * 1781: remote -> io.openliberty.tools:liberty-archetype-webapp (-)
- -  1782: remote -> io.openliberty.tools:liberty-plugin-archetype (-)
- -  2018: remote -> net.wasdev.maven.tools.archetypes:ejb-jee5-liberty (EJB 3.0 project targeting WebSphere Liberty)
- -  2019: remote -> net.wasdev.maven.tools.archetypes:ejb-jee6-liberty (EJB 3.1 project targeting WebSphere Liberty)
- -  2020: remote -> net.wasdev.maven.tools.archetypes:ejb-jee7-liberty (EJB 3.2 project targeting WebSphere Liberty)
- -  2021: remote -> net.wasdev.maven.tools.archetypes:osgi-liberty (OSGi project targeting WebSphere Liberty)
- -  2022: remote -> net.wasdev.maven.tools.archetypes:osgi-web25-liberty (OSGi Web 2.5 project targeting WebSphere Liberty)
- -  2023: remote -> net.wasdev.maven.tools.archetypes:osgi-web30-liberty (OSGi Web 3.0 project targeting WebSphere Liberty)
- -  2024: remote -> net.wasdev.maven.tools.archetypes:osgi-web31-liberty (OSGi Web 3.1 project targeting WebSphere Liberty)
- -  2025: remote -> net.wasdev.maven.tools.archetypes:webapp-jee5-liberty (Web 2.5 project targeting WebSphere Liberty)
- -  2026: remote -> net.wasdev.maven.tools.archetypes:webapp-jee6-liberty (Web 3.0 project targeting WebSphere Liberty)
- -  2027: remote -> net.wasdev.maven.tools.archetypes:webapp-jee7-liberty (Web 3.1 project targeting WebSphere Liberty)
- -  2028: remote -> net.wasdev.wlp.maven:liberty-archetype-ear (An archetype that generates a Java EE 7 multi-module project that includes an EJB module, a web application module and an EAR module)
- -  2029: remote -> net.wasdev.wlp.maven:liberty-archetype-webapp (-)
- -  2030: remote -> net.wasdev.wlp.maven:liberty-plugin-archetype (-)
+Lister tous les jobinstances
+https://localhost:9443/ibm/api/batch/jobinstances/
+
+/ibm/api/batch/v4/jobinstances
+/ibm/api/batch/v4/jobinstances/{jobinstanceid}
+/ibm/api/batch/v4/jobinstances/{jobinstanceid}/jobexecnum/{jobexecutionnumber}
+/ibm/api/batch/v4/jobinstances/{jobinstanceid}/jobexecnum/{jobexecutionnumber}/stepexecutions/{stepname}
+/ibm/api/batch/v4/jobinstances/{jobinstanceid}/jobexecutions
+/ibm/api/batch/v4/jobinstances/{jobinstanceid}/jobexecutions/{jobexecutionid}/joblogs
+/ibm/api/batch/v4/jobinstances/{jobinstanceid}/jobexecutions/{jobexecutionnumber}
+/ibm/api/batch/v4/jobinstances/{jobinstanceid}/jobexecutions/{jobexecutionnumber}/stepexecutions/{stepname}
+/ibm/api/batch/v4/jobinstances/{jobinstanceid}/joblogs
+
+/ibm/api/batch/v4/jobexecutions
+/ibm/api/batch/v4/jobexecutions/{jobexecutionid}
+/ibm/api/batch/v4/jobexecutions/{jobexecutionid}/jobinstance
+/ibm/api/batch/v4/jobexecutions/{jobexecutionid}/joblogs
+/ibm/api/batch/v4/jobexecutions/{jobexecutionid}/stepexecutions
+/ibm/api/batch/v4/jobexecutions/{jobexecutionid}/stepexecutions/{stepname}
+
+/ibm/api/batch/v4/stepexecutions/{stepexecutionid}
+
+
+POST https://localhost:9443/ibm/api/batch/jobinstances
+{
+    "applicationName": "liberty-batch-ear",
+    "moduleName": "liberty-batch-ejb.jar",
+    "componentName": "MyScheduler",
+    "jobXMLName": "jobTest.xml",
+    "jobParameters": {
+        "propertyBatchlet1": "propertyBatchlet1____________________",
+        "paramA": "jjjj____________"
+    }
+}

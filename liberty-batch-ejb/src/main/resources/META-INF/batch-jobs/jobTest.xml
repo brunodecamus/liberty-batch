@@ -10,17 +10,20 @@
   <!-- COMPLETED : The job finished executing successfully. -->
   <!-- ABANDONED : The job was marked abandoned. -->
 
+  <properties>
+    <property name="propertyJob1" value="#{jobParameters['propertyJob1']}?:1000;" />
+  </properties>
 
   <step id="idStep1">
     <batchlet ref="batch.jobtest.Step1BatchLet">
       <properties>
-        <property name="propertyName1" value="56" />
+        <property name="paramA" value="#{jobParameters['paramA']}?:77777;" />
+        <property name="propertyBatchlet1" value="#{jobParameters['propertyBatchlet1']}?:77777;" />
       </properties>
     </batchlet>
     <next on="COMPLETED" to="idStep2" />
     <fail on="*" exit-status="FAILED" />
   </step>
-
 
   <step id="idStep2" allow-start-if-complete="true">
     <batchlet ref="batch.jobtest.Step2BatchLet">
@@ -30,14 +33,12 @@
     <fail on="*" exit-status="FAILED" />
   </step>
 
-
   <step id="idStep3">
     <batchlet ref="batch.jobtest.Step3BatchLet">
     </batchlet>
     <end on="COMPLETED" exit-status="idStep4" />
     <fail on="*" exit-status="FAILED" />
   </step>
-
 
   <step id="idStep4">
     <batchlet ref="batch.jobtest.Step3BatchLet">
@@ -49,8 +50,7 @@
     <end on="STOPPED" exit-status="STOPPED" />
     <end on="FAILED" exit-status="FAILED" />
     <end on="ABANDONED" exit-status="ABANDONED" />
-    
-  </step>
 
+  </step>
 
 </job>

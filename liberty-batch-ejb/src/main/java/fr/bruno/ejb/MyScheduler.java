@@ -30,7 +30,7 @@ public class MyScheduler {
     LOGGER.info("Init de jobOperator OK");
   }
 
-  @Schedule(hour = "*", minute = "*/1", second = "0", persistent = false)
+  @Schedule(hour = "*", minute = "*/10", second = "0", persistent = false)
   public void runEveryOneMinutes(Timer timer) {
 
     LOGGER.info("Execution toutes les minutes");

@@ -17,12 +17,12 @@ public class Step1BatchLet extends AbstractBatchlet {
   JobContext jobContext;
 
   @Inject
-  @BatchProperty(name = "paramA")
-  private String paramA;
+  @BatchProperty(name = "timeMax")
+  private String timeMax;
 
   @Inject
-  @BatchProperty(name = "propertyBatchlet1")
-  private String propertyBatchlet1;
+  @BatchProperty(name = "keep")
+  private String keep;
 
   @Override
   public String process() throws Exception {
@@ -31,17 +31,17 @@ public class Step1BatchLet extends AbstractBatchlet {
     LOG.info(" - ExecutionId : " + jobContext.getExecutionId());
     LOG.info(" - ExitStatus? : " + jobContext.getExitStatus());
 
-    LOG.info(" - propertyBatchlet1 : " + propertyBatchlet1);
-    LOG.info(" - paramA : " + paramA);
+    LOG.info(" - keep : " + keep);
+    LOG.info(" - timeMax : " + timeMax);
 
     Random random = new Random();
-    int n = random.nextInt(21);
-    LOG.info("Random n : " + n);
+    int n = random.nextInt(new Integer(timeMax));
+    LOG.info(" - Random n : " + n);
 
     LOG.info(" - pause de " + n + "s");
     Thread.sleep(n * 1000);
 
-    if (n <= 7) {
+    if (n <= new Integer(keep)) {
       LOG.info("(n <= 7) => FAILED");
       return BatchStatus.FAILED.toString();
     }

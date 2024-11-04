@@ -17,8 +17,8 @@
   <step id="idStep1">
     <batchlet ref="batch.jobtest.Step1BatchLet">
       <properties>
-        <property name="paramA" value="#{jobParameters['paramA']}?:77777;" />
-        <property name="propertyBatchlet1" value="#{jobParameters['propertyBatchlet1']}?:77777;" />
+        <property name="timeMax" value="#{jobParameters['timeMax']}?:10;" />
+        <property name="keep" value="#{jobParameters['keep']}?:5;" />
       </properties>
     </batchlet>
     <next on="COMPLETED" to="idStep2" />

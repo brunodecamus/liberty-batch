@@ -53,7 +53,7 @@
 
   <library id="postgresql_lib">
     <!-- <fileset dir="${server.config.dir}/resources/derby" /> -->
-    <file name="${shared.resource.dir}/postgresql/postgresql-42.7.3.jar" />
+    <file name="${shared.resource.dir}/postgresql-42.7.3.jar" />
   </library>
 
   <!-- Batch persistence config. References a databaseStore. -->
@@ -67,7 +67,7 @@
   <!-- Note this data source is referenced by databaseStore element -->
   <dataSource id="batchDB" isolationLevel="TRANSACTION_REPEATABLE_READ">
     <jdbcDriver libraryRef="postgresql_lib" />
-    <properties.postgresql serverName="localhost" portNumber="5432" databaseName="postgres" user="user" password="pass" />
+    <properties.postgresql serverName="liberty-batch-db" portNumber="5432" databaseName="postgres" user="user" password="pass" />
   </dataSource>
 
   <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->

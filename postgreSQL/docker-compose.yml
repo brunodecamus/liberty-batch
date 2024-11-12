@@ -13,14 +13,11 @@ services:
     #    target: /dev/shm
     #    tmpfs:
     #      size: 134217728 # 128*2^20 bytes = 128Mb
-
     volumes:
       - C:/tmp/data:/var/lib/postgresql/data
-
     environment:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=pass
-
     ports:
       - 5432:5432
 

@@ -2,6 +2,9 @@ FROM open-liberty:24.0.0.10-kernel-slim-java11-openj9
 
 USER root
 
+RUN apt-get update
+RUN apt-get -y install iputils-ping
+
 COPY --chown=1001:0 postgresql-42.7.3.jar /opt/ol/wlp/usr/shared/resources/
 COPY --chown=1001:0 server.xml /config/
 RUN features.sh
